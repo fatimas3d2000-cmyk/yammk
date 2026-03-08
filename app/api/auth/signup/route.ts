@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
           phone,
           password: hashedPassword,
           user_type: userType,
-          created_at: new Date().toISOString(),
           is_active: true,
+          // Don't send created_at - let DB handle it
         },
       ])
       .select();
