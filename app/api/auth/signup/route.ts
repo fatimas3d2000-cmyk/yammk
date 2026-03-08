@@ -68,14 +68,12 @@ export async function POST(request: NextRequest) {
       .from("patients")
       .insert([
         {
-          name: fullName,  // Add name column (required)
           full_name: fullName,
           email,
           phone,
           password: hashedPassword,
           user_type: userType,
           is_active: true,
-          // Don't send created_at - let DB handle it
         },
       ])
       .select();
