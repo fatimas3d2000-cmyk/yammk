@@ -80,9 +80,16 @@ export async function POST(request: NextRequest) {
       .select();
 
     if (insertError) {
-      console.error("Supabase insert error:", insertError);
+      console.error("❌ Supabase insert error:", insertError);
+      console.error("Error code:", insertError.code);
+      console.error("Error message:", insertError.message);
+      console.error("Error details:", insertError.details);
       return NextResponse.json(
-        { error: "حدث خطأ أثناء إنشاء الحساب" },
+        { 
+          error: insertError.message || "حدث خطأ أثناء إنشاء الحساب",
+          details: insertError.details,
+          hint: insertError.hint,
+        },
         { status: 500 }
       );
     }
